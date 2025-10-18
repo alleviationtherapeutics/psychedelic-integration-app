@@ -236,8 +236,8 @@ const styles = StyleSheet.create({
   categoryChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingHorizontal: 12,
+    paddingVertical: 2,
     borderRadius: 14,
     backgroundColor: '#f3f4f6',
     marginRight: 8,
