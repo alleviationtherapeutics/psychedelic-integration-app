@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { supabase } from './lib/supabase';
 import AuthScreen from './screens/AuthScreen';
@@ -158,10 +159,11 @@ export default function App() {
   }
 
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {(session && session.user) || bypassAuth ? (
+    <SafeAreaProvider>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            {(session && session.user) || bypassAuth ? (
             <>
               <Stack.Screen name="MainTabs" component={MainTabs} />
               {/* Dual Mode Conversation Screens */}
@@ -264,6 +266,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
+    </SafeAreaProvider>
   );
 }
 
