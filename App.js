@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Platform, StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { supabase } from './lib/supabase';
 import AuthScreen from './screens/AuthScreen';
@@ -31,44 +31,59 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // Tab Navigator for authenticated users
-const MainTabs = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
+const MainTabs = () => {
+  const insets = useSafeAreaInsets();
+  // Use safe area inset if available, otherwise use a fallback for Android
+  // Android navigation bar is typically 48-56dp, so we use 60 to be safe
+  const bottomInset = Platform.OS === 'android' ? 60 : (insets.bottom > 0 ? insets.bottom : 0);
 
-        if (route.name === 'Sessions') {
-          iconName = 'chat';
-        } else if (route.name === 'Education') {
-          iconName = 'school';
-        } else if (route.name === 'AllSessions') {
-          iconName = 'list';
-        }
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-        return <MaterialIcons name={iconName} size={size} color={color} />;
-      },
-      tabBarActiveTintColor: '#2196F3',
-      tabBarInactiveTintColor: 'gray',
-      headerShown: false,
-    })}
-  >
-    <Tab.Screen 
-      name="Sessions" 
-      component={OrganizedHomeScreen}
-      options={{ title: 'Integration' }}
-    />
-    <Tab.Screen 
-      name="Education" 
-      component={EducationScreen}
-      options={{ title: 'Learn' }}
-    />
-    <Tab.Screen 
-      name="AllSessions" 
-      component={AllSessionsScreen}
-      options={{ title: 'All Sessions' }}
-    />
-  </Tab.Navigator>
-);
+          if (route.name === 'Sessions') {
+            iconName = 'chat';
+          } else if (route.name === 'Education') {
+            iconName = 'school';
+          } else if (route.name === 'AllSessions') {
+            iconName = 'list';
+          }
+
+          return <MaterialIcons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#2196F3',
+        tabBarInactiveTintColor: 'gray',
+        headerShown: false,
+        tabBarStyle: {
+          height: 60 + bottomInset, // Add safe area inset to height
+          paddingBottom: bottomInset, // Pad bottom by safe area inset
+          paddingTop: 8,
+        },
+        tabBarLabelStyle: {
+          paddingBottom: 4,
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Sessions"
+        component={OrganizedHomeScreen}
+        options={{ title: 'Integration' }}
+      />
+      <Tab.Screen
+        name="Education"
+        component={EducationScreen}
+        options={{ title: 'Learn' }}
+      />
+      <Tab.Screen
+        name="AllSessions"
+        component={AllSessionsScreen}
+        options={{ title: 'All Sessions' }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 // Main App Component with debug logging
 export default function App() {
@@ -86,7 +101,7 @@ export default function App() {
       setLoading(false);
       return;
     }
-    
+
     initializeApp();
   }, []);
 

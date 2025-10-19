@@ -9,6 +9,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, Appbar } from 'react-native-paper';
 import { supabase } from '../lib/supabase';
 import FeedbackButton from '../components/FeedbackButton';
@@ -328,7 +329,7 @@ const OrganizedHomeScreen = ({ navigation }) => {
 
   if (loading) {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <Appbar.Header>
           <Appbar.Content title="Integration" />
         </Appbar.Header>
@@ -336,12 +337,12 @@ const OrganizedHomeScreen = ({ navigation }) => {
           <ActivityIndicator size="large" />
           <Text style={styles.loadingText}>Loading your dashboard...</Text>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Appbar.Header>
         <Appbar.Content title="Integration" />
         <Appbar.Action
@@ -364,7 +365,7 @@ const OrganizedHomeScreen = ({ navigation }) => {
       </ScrollView>
 
       <FeedbackButton />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, Appbar, Card, FAB } from 'react-native-paper';
 import { supabase } from '../lib/supabase';
 
@@ -286,7 +287,7 @@ const AllSessionsScreen = ({ navigation }) => {
   console.log('AllSessionsScreen: Rendering, loading:', loading, 'sessions:', filteredSessions.length);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
         <Appbar.Content title="All Sessions" />
@@ -332,7 +333,7 @@ const AllSessionsScreen = ({ navigation }) => {
           size="small"
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

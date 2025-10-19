@@ -5,7 +5,9 @@ import {
   ScrollView,
   TouchableOpacity,
   StyleSheet,
+  Platform,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import SessionInfoHeader from '../components/SessionInfoHeader';
@@ -86,7 +88,7 @@ const SessionDetailScreen = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <LinearGradient
         colors={['#667eea', '#764ba2']}
         style={styles.headerGradient}
@@ -179,7 +181,7 @@ const SessionDetailScreen = ({ navigation, route }) => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -187,6 +189,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9fafb',
+    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   scrollContainer: {
     flex: 1,

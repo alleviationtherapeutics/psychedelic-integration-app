@@ -4,8 +4,10 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  Platform
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import PolyvagalEducationWidget from '../enhanced-components/PolyvagalEducationWidget';
 import PolyvagalMappingWidgetAI from '../enhanced-components/PolyvagalMappingWidgetAI';
 import TriggersAndGlimmersWidget from '../enhanced-components/TriggersAndGlimmersWidget';
@@ -46,7 +48,8 @@ const EducationScreen = ({ navigation }) => {
 
   const renderEducationHub = () => {
     return (
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <SafeAreaView style={styles.container} edges={['top']}>
+        <ScrollView contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Integration Education</Text>
@@ -232,6 +235,7 @@ const EducationScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     );
   };
 
@@ -294,7 +298,7 @@ const EducationScreen = ({ navigation }) => {
     }
 
     return (
-      <View style={styles.topicContainer}>
+      <SafeAreaView style={styles.topicContainer} edges={['top']}>
         <View style={styles.topicHeader}>
           <TouchableOpacity onPress={() => setSelectedTopic(null)}>
             <Text style={styles.backButton}>← Back to Education</Text>
@@ -335,7 +339,7 @@ const EducationScreen = ({ navigation }) => {
             <Text style={styles.completeButtonText}>✓ Got It!</Text>
           </TouchableOpacity>
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   };
 
@@ -615,6 +619,7 @@ const styles = {
   topicContainer: {
     flex: 1,
     backgroundColor: '#ffffff',
+    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   topicHeader: {
     padding: 16,

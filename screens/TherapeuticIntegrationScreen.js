@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ScrollView, 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
+import {
+  ScrollView,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
   Alert,
   Animated,
-  ActivityIndicator
+  ActivityIndicator,
+  Platform
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
 import TherapeuticIntegrationService from '../enhanced-components/therapeuticIntegrationService';
 import EmbeddedPracticeWidget from '../enhanced-components/EmbeddedPracticeWidget';
@@ -626,7 +628,7 @@ Before we dive in, let's check in with your nervous system. How is your body fee
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -673,7 +675,7 @@ Before we dive in, let's check in with your nervous system. How is your body fee
           onSkip={() => setCurrentPractice(null)}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -681,6 +683,7 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: '#f9fafb',
+    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   errorContainer: {
     flex: 1,

@@ -11,6 +11,7 @@ import {
   Modal,
   ActivityIndicator
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../lib/supabase';
@@ -153,7 +154,7 @@ const SessionToolsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <LinearGradient
         colors={['#0ea5e9', '#3b82f6']}
         style={styles.headerGradient}
@@ -394,7 +395,7 @@ const SessionToolsScreen = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -402,6 +403,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9fafb',
+    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   headerGradient: {
     paddingHorizontal: 24,
