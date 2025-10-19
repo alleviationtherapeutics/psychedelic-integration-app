@@ -7,8 +7,10 @@ import {
   ActivityIndicator,
   ScrollView
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
 import userRoleService from '../lib/userRoleService';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const AdminSetupScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -186,7 +188,8 @@ const AdminSetupScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <ScrollView style={styles.scroll}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>← Back</Text>
@@ -288,47 +291,51 @@ const AdminSetupScreen = ({ navigation }) => {
         </Text>
       </View>
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
+  },
+  scroll: {
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: colors.border,
   },
   backButton: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
     marginRight: 16,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   section: {
     margin: 16,
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginBottom: 16,
   },
   roleInfo: {
@@ -354,17 +361,17 @@ const styles = {
     backgroundColor: '#059669',
   },
   refreshButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
   },
   buttonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
     marginBottom: 4,
   },
   buttonSubtext: {
     fontSize: 12,
-    color: '#ffffff',
+    color: colors.textInverse,
     opacity: 0.9,
     textAlign: 'center',
   },
@@ -389,7 +396,7 @@ const styles = {
   codeTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#374151',
+    color: colors.text,
     marginBottom: 4,
     marginTop: 8,
   },
