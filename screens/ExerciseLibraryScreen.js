@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
   },
   categoryScrollContent: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 8,
     gap: 8,
   },
   categoryChip: {
