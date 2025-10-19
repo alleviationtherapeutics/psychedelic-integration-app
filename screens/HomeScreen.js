@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, Appbar, Card, FAB } from 'react-native-paper';
 import { supabase } from '../lib/supabase';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const HomeScreen = ({ navigation }) => {
   const [sessions, setSessions] = useState([]);
@@ -198,7 +200,7 @@ const HomeScreen = ({ navigation }) => {
   console.log('HomeScreen: Rendering, loading:', loading, 'sessions:', sessions.length);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <Appbar.Header>
         <Appbar.Content title="Integration Sessions" />
         <Appbar.Action
@@ -245,14 +247,14 @@ const HomeScreen = ({ navigation }) => {
         label="New Session"
         onPress={createNewSession}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
   },
   debugContainer: {
     backgroundColor: '#e8f5e8',
@@ -273,7 +275,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   adminButtonText: {
-    color: '#ffffff',
+    color: colors.textInverse,
     fontSize: 14,
     fontWeight: 'bold',
   },
@@ -285,7 +287,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
   },
   sessionsList: {
     padding: 16,
@@ -310,7 +312,7 @@ const styles = StyleSheet.create({
   },
   sessionStep: {
     fontSize: 12,
-    color: '#2196f3',
+    color: colors.primary,
     marginBottom: 4,
   },
   sessionId: {
@@ -332,19 +334,19 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 32,
   },
   createButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: colors.primary,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   createButtonText: {
-    color: '#fff',
+    color: colors.textInverse,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -353,7 +355,7 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: '#2196f3',
+    backgroundColor: colors.primary,
   },
 });
 
