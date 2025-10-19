@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Platform, StatusBar, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { supabase } from './lib/supabase';
 import { colors } from './theme/colors';
 import AuthScreen from './screens/AuthScreen';
+import OnboardingCarousel from './screens/OnboardingCarousel';
 import ConversationScreen from './screens/ConversationScreen';
 import SimpleEnhancedConversationScreen from './screens/SimpleEnhancedConversationScreen';
 import EnhancedConversationScreen from './screens/EnhancedConversationScreen';
@@ -96,6 +98,12 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [debugInfo, setDebugInfo] = useState('Starting app...');
   const [bypassAuth, setBypassAuth] = useState(false); // Add bypass mode
+  const [onboardingComplete, setOnboardingComplete] = useState(false);
+  const [checkingOnboarding, setCheckingOnboarding] = useState(true);
+
+  useEffect(() => {
+    checkOnboardingStatus();
+  }, []);
 
   useEffect(() => {
     // Check if we should bypass auth for testing
@@ -107,8 +115,26 @@ export default function App() {
       return;
     }
 
-    initializeApp();
-  }, []);
+    if (!checkingOnboarding) {
+      initializeApp();
+    }
+  }, [checkingOnboarding]);
+
+  const checkOnboardingStatus = async () => {
+    try {
+      const completed = await AsyncStorage.getItem('onboarding_completed');
+      setOnboardingComplete(completed === 'true');
+    } catch (error) {
+      console.error('Error checking onboarding status:', error);
+      setOnboardingComplete(false); // Default to showing onboarding
+    } finally {
+      setCheckingOnboarding(false);
+    }
+  };
+
+  const handleOnboardingComplete = () => {
+    setOnboardingComplete(true);
+  };
 
   const initializeApp = async () => {
     try {
@@ -151,20 +177,29 @@ export default function App() {
     }
   };
 
-  console.log('App: Rendering, loading:', loading, 'session:', !!session);
+  console.log('App: Rendering, loading:', loading, 'session:', !!session, 'onboarding:', onboardingComplete);
 
-  if (loading) {
+  // Show onboarding for first-time users (after auth check)
+  if ((session?.user || bypassAuth) && !onboardingComplete && !checkingOnboarding) {
+    return (
+      <SafeAreaProvider>
+        <OnboardingCarousel onComplete={handleOnboardingComplete} />
+      </SafeAreaProvider>
+    );
+  }
+
+  if (loading || checkingOnboarding) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#2196F3" />
-        <Text style={styles.loadingTitle}>Psychedelic Integration App</Text>
+        <ActivityIndicator size="large" color={colors.primary} />
+        <Text style={styles.loadingTitle}>Noesis</Text>
         <Text style={styles.debugText}>{debugInfo}</Text>
         <Text style={styles.debugHint}>
           If stuck here, check console logs or try restarting
         </Text>
-        
+
         {/* Emergency bypass button */}
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.bypassButton}
           onPress={() => {
             console.log('Emergency bypass activated');
