@@ -1,18 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ScrollView, 
-  View, 
-  Text, 
-  TextInput, 
-  TouchableOpacity, 
+import {
+  ScrollView,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
   Alert,
   Animated,
   Dimensions,
   ActivityIndicator
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
 import DualModeClaudeService from '../enhanced-components/dualModeClaudeService';
 import EmbeddedPracticeWidget from '../enhanced-components/EmbeddedPracticeWidget';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -627,7 +629,7 @@ What themes or insights from your experience would you like to explore in relati
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -674,44 +676,44 @@ What themes or insights from your experience would you like to explore in relati
           onSkip={() => setCurrentPractice(null)}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   errorContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 32,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
   },
   errorTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#d32f2f',
+    color: colors.error,
     marginBottom: 16,
     textAlign: 'center',
   },
   errorText: {
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
     textAlign: 'center',
     marginBottom: 32,
     lineHeight: 24,
   },
   backButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: colors.primary,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   backButtonText: {
-    color: '#fff',
+    color: colors.textInverse,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -719,27 +721,27 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: colors.border,
   },
   backText: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
     marginRight: 16,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   modeToggleContainer: {
     flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: colors.border,
     gap: 8,
   },
   modeButton: {
@@ -747,22 +749,22 @@ const styles = {
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: colors.background,
     borderWidth: 1,
-    borderColor: '#d1d5db',
+    borderColor: colors.border,
   },
   modeButtonActive: {
-    backgroundColor: '#3b82f6',
-    borderColor: '#3b82f6',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   modeButtonText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#6b7280',
+    color: colors.textSecondary,
     textAlign: 'center',
   },
   modeButtonTextActive: {
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   nervousSystemHeader: {
     flexDirection: 'row',
@@ -867,24 +869,24 @@ const styles = {
     maxWidth: '85%',
   },
   userBubble: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     alignSelf: 'flex-end',
   },
   assistantBubble: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     alignSelf: 'flex-start',
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: colors.border,
   },
   messageText: {
     fontSize: 16,
     lineHeight: 22,
   },
   userText: {
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   assistantText: {
-    color: '#1f2937',
+    color: colors.text,
   },
   johnsonStepIndicator: {
     marginTop: 8,
@@ -963,37 +965,37 @@ const styles = {
   inputContainer: {
     flexDirection: 'row',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderTopWidth: 1,
-    borderTopColor: '#e5e7eb',
+    borderTopColor: colors.border,
     alignItems: 'flex-end',
     gap: 12,
   },
   textInput: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#d1d5db',
+    borderColor: colors.border,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     fontSize: 16,
     maxHeight: 120,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
   },
   sendButton: {
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },
   sendButtonDisabled: {
-    backgroundColor: '#9ca3af',
+    backgroundColor: colors.disabled,
   },
   sendButtonText: {
     fontSize: 20,
-    color: '#ffffff',
+    color: colors.textInverse,
     fontWeight: 'bold',
   },
   practiceIndicatorBottom: {
