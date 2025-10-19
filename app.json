@@ -48,6 +48,9 @@
     "owner": "alleviationtherapeutics",
     "updates": {
       "url": "https://u.expo.dev/51f2a410-267f-47c9-a2c8-f77b168d782c"
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
