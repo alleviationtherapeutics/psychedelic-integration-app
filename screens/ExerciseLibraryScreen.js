@@ -7,9 +7,11 @@ import {
   StyleSheet,
   Modal,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { getAllExercises, exerciseCategories } from '../content/exercises';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const ExerciseLibraryScreen = ({ navigation }) => {
   const [selectedExercise, setSelectedExercise] = useState(null);
@@ -44,16 +46,16 @@ const ExerciseLibraryScreen = ({ navigation }) => {
               <View style={styles.modalHeaderTop}>
                 <Text style={styles.modalTitle}>{selectedExercise.title}</Text>
                 <TouchableOpacity onPress={() => setSelectedExercise(null)}>
-                  <MaterialIcons name="close" size={28} color="#ffffff" />
+                  <MaterialIcons name="close" size={28} color={colors.textInverse} />
                 </TouchableOpacity>
               </View>
               <View style={styles.modalMetadata}>
                 <View style={styles.metadataItem}>
-                  <MaterialIcons name="schedule" size={16} color="#ffffff" />
+                  <MaterialIcons name="schedule" size={16} color={colors.textInverse} />
                   <Text style={styles.metadataText}>{selectedExercise.duration} min</Text>
                 </View>
                 <View style={styles.metadataItem}>
-                  <MaterialIcons name={categoryInfo.icon} size={16} color="#ffffff" />
+                  <MaterialIcons name={categoryInfo.icon} size={16} color={colors.textInverse} />
                   <Text style={styles.metadataText}>{categoryInfo.name}</Text>
                 </View>
               </View>
@@ -90,7 +92,7 @@ const ExerciseLibraryScreen = ({ navigation }) => {
                 style={[styles.startButton, { backgroundColor: categoryInfo.color }]}
                 onPress={() => setSelectedExercise(null)}
               >
-                <MaterialIcons name="check" size={20} color="#ffffff" />
+                <MaterialIcons name="check" size={20} color={colors.textInverse} />
                 <Text style={styles.startButtonText}>Got It</Text>
               </TouchableOpacity>
             </View>
@@ -101,16 +103,16 @@ const ExerciseLibraryScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <LinearGradient
-        colors={['#667eea', '#764ba2']}
+        colors={gradients.warm}
         style={styles.headerGradient}
       >
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+          <MaterialIcons name="arrow-back" size={24} color={colors.textInverse} />
         </TouchableOpacity>
 
         <Text style={styles.heroTitle}>Exercise Library</Text>
@@ -137,7 +139,7 @@ const ExerciseLibraryScreen = ({ navigation }) => {
             <MaterialIcons
               name={category.icon}
               size={18}
-              color={selectedCategory === category.id ? '#ffffff' : '#6b7280'}
+              color={selectedCategory === category.id ? colors.textInverse : colors.textSecondary}
             />
             <Text style={[
               styles.categoryChipText,
@@ -164,7 +166,7 @@ const ExerciseLibraryScreen = ({ navigation }) => {
                 onPress={() => setSelectedExercise(exercise)}
               >
                 <View style={[styles.exerciseIcon, { backgroundColor: categoryInfo.color }]}>
-                  <MaterialIcons name={categoryInfo.icon} size={24} color="#ffffff" />
+                  <MaterialIcons name={categoryInfo.icon} size={24} color={colors.textInverse} />
                 </View>
 
                 <View style={styles.exerciseContent}>
@@ -174,7 +176,7 @@ const ExerciseLibraryScreen = ({ navigation }) => {
                   </Text>
                   <View style={styles.exerciseMetadata}>
                     <View style={styles.metadataBadge}>
-                      <MaterialIcons name="schedule" size={14} color="#6b7280" />
+                      <MaterialIcons name="schedule" size={14} color={colors.textSecondary} />
                       <Text style={styles.metadataBadgeText}>{exercise.duration} min</Text>
                     </View>
                     <View style={styles.metadataBadge}>
@@ -191,14 +193,14 @@ const ExerciseLibraryScreen = ({ navigation }) => {
       </ScrollView>
 
       {renderExerciseModal()}
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   headerGradient: {
     paddingHorizontal: 24,
@@ -215,7 +217,7 @@ const styles = StyleSheet.create({
   heroTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
     marginTop: 20,
   },
   heroSubtitle: {
@@ -224,7 +226,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   categoryScroll: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
     maxHeight: 56,
@@ -248,10 +250,10 @@ const styles = StyleSheet.create({
   categoryChipText: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   categoryChipTextActive: {
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   exercisesList: {
     flex: 1,
@@ -261,13 +263,13 @@ const styles = StyleSheet.create({
   },
   resultsText: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginBottom: 16,
   },
   exerciseCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
@@ -291,12 +293,12 @@ const styles = StyleSheet.create({
   exerciseTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 4,
   },
   exerciseInstructions: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 20,
     marginBottom: 8,
   },
@@ -315,7 +317,7 @@ const styles = StyleSheet.create({
   },
   metadataBadgeText: {
     fontSize: 12,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   modalOverlay: {
@@ -324,7 +326,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     maxHeight: '90%',
@@ -343,7 +345,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
     flex: 1,
     marginRight: 16,
   },
@@ -358,7 +360,7 @@ const styles = StyleSheet.create({
   },
   metadataText: {
     fontSize: 14,
-    color: '#ffffff',
+    color: colors.textInverse,
     fontWeight: '500',
   },
   modalBody: {
@@ -370,7 +372,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
   },
   instructionsText: {
@@ -390,7 +392,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -399,7 +401,7 @@ const styles = StyleSheet.create({
   stepNumberText: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   stepText: {
     flex: 1,
@@ -438,7 +440,7 @@ const styles = StyleSheet.create({
   startButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
 });
 
