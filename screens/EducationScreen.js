@@ -8,6 +8,7 @@ import {
   Platform
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 import PolyvagalEducationWidget from '../enhanced-components/PolyvagalEducationWidget';
 import PolyvagalMappingWidgetAI from '../enhanced-components/PolyvagalMappingWidgetAI';
 import TriggersAndGlimmersWidget from '../enhanced-components/TriggersAndGlimmersWidget';
@@ -48,7 +49,7 @@ const EducationScreen = ({ navigation }) => {
 
   const renderEducationHub = () => {
     return (
-      <SafeAreaView style={styles.container} edges={['top']}>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
         <ScrollView contentContainerStyle={styles.content}>
         {/* Header */}
         <View style={styles.header}>
@@ -298,7 +299,7 @@ const EducationScreen = ({ navigation }) => {
     }
 
     return (
-      <SafeAreaView style={styles.topicContainer} edges={['top']}>
+      <SafeAreaView style={styles.topicContainer} edges={['top', 'bottom']}>
         <View style={styles.topicHeader}>
           <TouchableOpacity onPress={() => setSelectedTopic(null)}>
             <Text style={styles.backButton}>← Back to Education</Text>
@@ -353,26 +354,26 @@ const EducationScreen = ({ navigation }) => {
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   content: {
     paddingBottom: 32,
   },
   header: {
     padding: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   headerSubtitle: {
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 24,
   },
   section: {
@@ -382,7 +383,7 @@ const styles = {
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 16,
   },
   quickStartCard: {
@@ -390,11 +391,11 @@ const styles = {
     borderRadius: 16,
     padding: 20,
     borderWidth: 2,
-    borderColor: '#3b82f6',
+    borderColor: colors.primary,
   },
   sectionSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginBottom: 16,
     marginTop: -8,
   },
@@ -403,7 +404,7 @@ const styles = {
     borderRadius: 16,
     padding: 20,
     borderWidth: 2,
-    borderColor: '#a855f7',
+    borderColor: colors.primary,
   },
   ifsContent: {
     flexDirection: 'row',
@@ -419,12 +420,12 @@ const styles = {
   ifsTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#7c3aed',
+    color: colors.primary,
     marginBottom: 6,
   },
   ifsDescription: {
     fontSize: 14,
-    color: '#7c3aed',
+    color: colors.primary,
     lineHeight: 20,
     marginBottom: 6,
   },
@@ -470,12 +471,12 @@ const styles = {
   mappingTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 4,
   },
   mappingDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 18,
     marginBottom: 4,
   },
@@ -506,7 +507,7 @@ const styles = {
   },
   quickStartTime: {
     fontSize: 12,
-    color: '#3b82f6',
+    color: colors.primary,
     fontWeight: '500',
   },
   trainingCard: {
@@ -560,7 +561,7 @@ const styles = {
     gap: 16,
   },
   topicCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 20,
     borderWidth: 1,
@@ -578,12 +579,12 @@ const styles = {
   topicTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   topicDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -598,7 +599,7 @@ const styles = {
   tip: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     padding: 16,
     borderRadius: 8,
     borderLeftWidth: 4,
@@ -618,7 +619,7 @@ const styles = {
   // Selected topic styles
   topicContainer: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
   },
   topicHeader: {
     padding: 16,
@@ -627,7 +628,7 @@ const styles = {
   },
   backButton: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
     fontWeight: '500',
   },
   topicContent: {
@@ -642,7 +643,7 @@ const styles = {
   topicLargeTitle: {
     fontSize: 24,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     textAlign: 'center',
     marginBottom: 32,
   },
@@ -657,12 +658,12 @@ const styles = {
   comingSoonTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
   },
   comingSoonText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
     textAlign: 'center',
     marginBottom: 24,
     lineHeight: 24,
@@ -685,7 +686,7 @@ const styles = {
   // New styles for content display
   topicEstimatedTime: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     textAlign: 'center',
     marginBottom: 24,
   },
@@ -695,7 +696,7 @@ const styles = {
   contentSectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
   },
   contentSectionText: {
@@ -745,7 +746,7 @@ const styles = {
   completeButtonText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
 };
 
