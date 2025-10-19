@@ -11,6 +11,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import SessionInfoHeader from '../components/SessionInfoHeader';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const SessionDetailScreen = ({ navigation, route }) => {
   const insets = useSafeAreaInsets();
@@ -91,14 +92,14 @@ const SessionDetailScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top']}>
       <LinearGradient
-        colors={['#667eea', '#764ba2']}
+        colors={gradients.warm}
         style={styles.headerGradient}
       >
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+          <MaterialIcons name="arrow-back" size={24} color={colors.textInverse} />
         </TouchableOpacity>
 
         <Text style={styles.heroTitle}>{currentSession?.title}</Text>
@@ -132,7 +133,7 @@ const SessionDetailScreen = ({ navigation, route }) => {
                       <MaterialIcons
                         name={option.status === 'Completed' ? 'check-circle' : option.status === 'In Progress' ? 'schedule' : 'radio-button-unchecked'}
                         size={14}
-                        color="#ffffff"
+                        color={colors.textInverse}
                       />
                       <Text style={styles.statusText}>{option.status}</Text>
                     </View>
@@ -160,7 +161,7 @@ const SessionDetailScreen = ({ navigation, route }) => {
                   <Text style={styles.optionButtonText}>
                     {option.status === 'Completed' ? 'Review' : option.status === 'In Progress' ? 'Continue' : 'Start'}
                   </Text>
-                  <MaterialIcons name="arrow-forward" size={20} color="#ffffff" />
+                  <MaterialIcons name="arrow-forward" size={20} color={colors.textInverse} />
                 </TouchableOpacity>
               </View>
 
@@ -189,7 +190,7 @@ const SessionDetailScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   scrollContainer: {
     flex: 1,
@@ -209,7 +210,7 @@ const styles = StyleSheet.create({
   heroTitle: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
     textAlign: 'center',
     marginBottom: 8,
     marginTop: 8,
@@ -226,17 +227,17 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
   },
   bodyText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 24,
     marginBottom: 24,
   },
   optionCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 24,
     marginBottom: 12,
@@ -269,7 +270,7 @@ const styles = StyleSheet.create({
   optionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   statusBadge: {
@@ -279,7 +280,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 12,
-    backgroundColor: '#6b7280',
+    backgroundColor: colors.textSecondary,
   },
   statusCompleted: {
     backgroundColor: '#10b981',
@@ -290,12 +291,12 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 11,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
     marginLeft: 4,
   },
   optionDescription: {
     fontSize: 15,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 22,
     marginBottom: 16,
   },
@@ -311,7 +312,7 @@ const styles = StyleSheet.create({
   },
   detailBullet: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginRight: 8,
   },
   detailText: {
@@ -339,7 +340,7 @@ const styles = StyleSheet.create({
   optionButtonText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
     marginRight: 6,
   },
   stepConnector: {
