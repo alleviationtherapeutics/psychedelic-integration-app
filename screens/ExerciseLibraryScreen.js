@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
+    maxHeight: 56,
   },
   categoryScrollContent: {
     paddingHorizontal: 16,
