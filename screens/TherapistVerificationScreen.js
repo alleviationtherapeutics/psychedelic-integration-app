@@ -8,7 +8,9 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import userRoleService from '../lib/userRoleService';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const TherapistVerificationScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -102,7 +104,8 @@ const TherapistVerificationScreen = ({ navigation }) => {
   // Show status if already submitted
   if (verificationStatus?.status && verificationStatus.status !== 'none') {
     return (
-      <ScrollView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+      <ScrollView style={styles.scroll}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.backButton}>← Back</Text>
@@ -162,11 +165,13 @@ const TherapistVerificationScreen = ({ navigation }) => {
           )}
         </View>
       </ScrollView>
+      </SafeAreaView>
     );
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <ScrollView style={styles.scroll}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backButton}>← Back</Text>
@@ -291,42 +296,46 @@ const TherapistVerificationScreen = ({ navigation }) => {
 
       <View style={styles.bottomPadding} />
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
+  },
+  scroll: {
+    flex: 1,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: colors.border,
   },
   backButton: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
     marginRight: 16,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   infoSection: {
     margin: 16,
@@ -348,7 +357,7 @@ const styles = {
   statusContainer: {
     margin: 16,
     padding: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     alignItems: 'center',
   },
@@ -359,7 +368,7 @@ const styles = {
   statusTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
     textAlign: 'center',
   },
@@ -385,7 +394,7 @@ const styles = {
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 16,
   },
   inputGroup: {
@@ -394,13 +403,13 @@ const styles = {
   label: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#374151',
+    color: colors.text,
     marginBottom: 6,
   },
   input: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: '#d1d5db',
+    borderColor: colors.border,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
@@ -429,17 +438,17 @@ const styles = {
   submitButton: {
     margin: 16,
     padding: 16,
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     borderRadius: 8,
     alignItems: 'center',
   },
   submitButtonDisabled: {
-    backgroundColor: '#9ca3af',
+    backgroundColor: colors.disabled,
   },
   submitButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   bottomPadding: {
     height: 32,
