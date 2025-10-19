@@ -7,7 +7,9 @@ import {
   ScrollView,
   Alert
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import ScenarioTrainingSystem from '../lib/scenarioTrainingSystem';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const ScenarioUploadScreen = ({ navigation }) => {
   const [uploadMethod, setUploadMethod] = useState('text'); // 'text' or 'json'
@@ -91,7 +93,8 @@ NOTES: Mystical experiences need validation and somatic integration`;
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <ScrollView style={styles.scroll}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -192,31 +195,35 @@ NOTES: Mystical experiences need validation and somatic integration`;
 
       <View style={styles.bottomPadding} />
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
+  },
+  scroll: {
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: colors.border,
   },
   backButton: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
     marginRight: 16,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   infoSection: {
     margin: 16,
@@ -241,7 +248,7 @@ const styles = {
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
   },
   formatButtons: {
@@ -253,43 +260,43 @@ const styles = {
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#d1d5db',
-    backgroundColor: '#ffffff',
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
     alignItems: 'center',
   },
   formatButtonActive: {
-    borderColor: '#3b82f6',
-    backgroundColor: '#3b82f6',
+    borderColor: colors.primary,
+    backgroundColor: colors.primary,
   },
   formatButtonText: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   formatButtonTextActive: {
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   instructionsSection: {
     margin: 16,
     marginTop: 0,
   },
   instructions: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: colors.border,
   },
   instructionText: {
     fontSize: 14,
-    color: '#374151',
+    color: colors.text,
     marginBottom: 8,
   },
   exampleText: {
     fontSize: 12,
     fontFamily: 'monospace',
-    color: '#6b7280',
-    backgroundColor: '#f3f4f6',
+    color: colors.textSecondary,
+    backgroundColor: colors.background,
     padding: 8,
     borderRadius: 4,
   },
@@ -297,13 +304,13 @@ const styles = {
     margin: 16,
     marginTop: 0,
     padding: 12,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: colors.background,
     borderRadius: 8,
     alignItems: 'center',
   },
   exampleButtonText: {
     fontSize: 14,
-    color: '#374151',
+    color: colors.text,
     fontWeight: '500',
   },
   inputSection: {
@@ -311,9 +318,9 @@ const styles = {
     marginTop: 0,
   },
   textInput: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: '#d1d5db',
+    borderColor: colors.border,
     borderRadius: 8,
     padding: 12,
     fontSize: 14,
@@ -323,17 +330,17 @@ const styles = {
   uploadButton: {
     margin: 16,
     padding: 16,
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     borderRadius: 8,
     alignItems: 'center',
   },
   uploadButtonDisabled: {
-    backgroundColor: '#9ca3af',
+    backgroundColor: colors.disabled,
   },
   uploadButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   bottomPadding: {
     height: 32,
