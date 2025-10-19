@@ -10,9 +10,11 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, Appbar, Chip, Menu } from 'react-native-paper';
 import { IntegrationGuide } from '../lib/claudeService';
 import { supabase } from '../lib/supabase';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const ConversationScreen = ({ navigation, route }) => {
   // DEBUG: Log the route params immediately
@@ -376,8 +378,9 @@ const ConversationScreen = ({ navigation, route }) => {
   }
 
   return (
-    <KeyboardAvoidingView 
-      style={styles.container}
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+    <KeyboardAvoidingView
+      style={styles.flex}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <Appbar.Header>
@@ -527,30 +530,34 @@ const ConversationScreen = ({ navigation, route }) => {
         )}
       </View>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
+  },
+  flex: {
+    flex: 1,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
   },
   entitiesContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     paddingVertical: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+    borderBottomColor: colors.border,
   },
   entitiesList: {
     paddingHorizontal: 16,
@@ -576,7 +583,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
     textAlign: 'center',
     lineHeight: 24,
   },
@@ -594,12 +601,12 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#2196F3',
+    backgroundColor: colors.primary,
     borderBottomRightRadius: 4,
   },
   assistantMessage: {
     alignSelf: 'flex-start',
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderBottomLeftRadius: 4,
   },
   messageText: {
@@ -607,10 +614,10 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
   userMessageText: {
-    color: '#fff',
+    color: colors.textInverse,
   },
   assistantMessageText: {
-    color: '#000',
+    color: colors.text,
   },
   entitiesInMessage: {
     flexDirection: 'row',
@@ -628,9 +635,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: '#fff',
+    backgroundColor: colors.surface,
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
+    borderTopColor: colors.border,
   },
   textInput: {
     flex: 1,
@@ -644,17 +651,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
   },
   sendButton: {
-    backgroundColor: '#2196F3',
+    backgroundColor: colors.primary,
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
     marginLeft: 8,
   },
   sendButtonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: colors.disabled,
   },
   sendButtonText: {
-    color: '#fff',
+    color: colors.textInverse,
     fontWeight: 'bold',
   },
   errorContainer: {
@@ -662,37 +669,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 32,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: colors.background,
   },
   errorTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#d32f2f',
+    color: colors.error,
     marginBottom: 16,
     textAlign: 'center',
   },
   errorText: {
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
     textAlign: 'center',
     marginBottom: 12,
     lineHeight: 24,
   },
   debugText: {
     fontSize: 12,
-    color: '#999',
+    color: colors.textLight,
     textAlign: 'center',
     marginBottom: 32,
     fontFamily: 'monospace',
   },
   backButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: colors.primary,
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   backButtonText: {
-    color: '#fff',
+    color: colors.textInverse,
     fontSize: 16,
     fontWeight: 'bold',
   },
