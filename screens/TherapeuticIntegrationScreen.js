@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 import { supabase } from '../lib/supabase';
 import TherapeuticIntegrationService from '../enhanced-components/therapeuticIntegrationService';
 import EmbeddedPracticeWidget from '../enhanced-components/EmbeddedPracticeWidget';
@@ -630,7 +631,7 @@ Before we dive in, let's check in with your nervous system. How is your body fee
   };
 
   return (
-    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top']}>
+    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top', 'bottom']}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -690,7 +691,7 @@ Before we dive in, let's check in with your nervous system. How is your body fee
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   errorContainer: {
     flex: 1,
@@ -729,18 +730,18 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
   },
   backText: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   switchText: {
     fontSize: 12,
@@ -752,7 +753,7 @@ const styles = {
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
   },
@@ -767,14 +768,14 @@ const styles = {
   stateLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   sessionInfo: {
     alignItems: 'flex-end',
   },
   sessionPhaseText: {
     fontSize: 12,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   practiceCount: {
@@ -782,7 +783,7 @@ const styles = {
     color: '#9ca3af',
   },
   therapeuticFocusContainer: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderBottomWidth: 1,
@@ -825,11 +826,11 @@ const styles = {
     maxWidth: '85%',
   },
   userBubble: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     alignSelf: 'flex-end',
   },
   assistantBubble: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     alignSelf: 'flex-start',
     borderWidth: 1,
     borderColor: '#e5e7eb',
@@ -839,10 +840,10 @@ const styles = {
     lineHeight: 22,
   },
   userText: {
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   assistantText: {
-    color: '#1f2937',
+    color: colors.text,
   },
   therapeuticThemesContainer: {
     flexDirection: 'row',
@@ -886,19 +887,19 @@ const styles = {
   },
   contextText: {
     fontSize: 11,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontStyle: 'italic',
   },
   practiceIndicator: {
     marginTop: 6,
     paddingHorizontal: 8,
     paddingVertical: 4,
-    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+    backgroundColor: 'rgba(212, 114, 92, 0.1)',
     borderRadius: 8,
   },
   practiceText: {
     fontSize: 12,
-    color: '#3b82f6',
+    color: colors.primary,
     fontWeight: '500',
   },
   typingIndicator: {
@@ -914,13 +915,13 @@ const styles = {
   },
   typingText: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontStyle: 'italic',
   },
   inputContainer: {
     flexDirection: 'row',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderTopWidth: 1,
     borderTopColor: '#e5e7eb',
     alignItems: 'flex-end',
@@ -935,13 +936,13 @@ const styles = {
     paddingVertical: 12,
     fontSize: 16,
     maxHeight: 120,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
   },
   sendButton: {
     width: 44,
     height: 44,
     borderRadius: 22,
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -950,7 +951,7 @@ const styles = {
   },
   sendButtonText: {
     fontSize: 20,
-    color: '#ffffff',
+    color: colors.textInverse,
     fontWeight: 'bold',
   },
   practiceIndicatorBottom: {
@@ -964,7 +965,7 @@ const styles = {
   },
   practiceIndicatorText: {
     fontSize: 14,
-    color: '#3b82f6',
+    color: colors.primary,
     fontWeight: '500',
   },
 };
