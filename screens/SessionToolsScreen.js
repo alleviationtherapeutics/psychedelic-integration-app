@@ -11,12 +11,13 @@ import {
   Modal,
   ActivityIndicator
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../lib/supabase';
 
 const SessionToolsScreen = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -154,7 +155,7 @@ const SessionToolsScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top']}>
       <LinearGradient
         colors={['#0ea5e9', '#3b82f6']}
         style={styles.headerGradient}
@@ -403,7 +404,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9fafb',
-    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   headerGradient: {
     paddingHorizontal: 24,

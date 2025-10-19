@@ -619,7 +619,6 @@ const styles = {
   topicContainer: {
     flex: 1,
     backgroundColor: '#ffffff',
-    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   topicHeader: {
     padding: 16,

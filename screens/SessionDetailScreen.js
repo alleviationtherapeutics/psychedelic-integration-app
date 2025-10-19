@@ -7,12 +7,13 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import SessionInfoHeader from '../components/SessionInfoHeader';
 
 const SessionDetailScreen = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets();
   const [currentSession, setCurrentSession] = useState(route.params?.session || null);
 
   useEffect(() => {
@@ -88,7 +89,7 @@ const SessionDetailScreen = ({ navigation, route }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top']}>
       <LinearGradient
         colors={['#667eea', '#764ba2']}
         style={styles.headerGradient}
@@ -189,7 +190,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9fafb',
-    paddingBottom: Platform.OS === 'android' ? 60 : 0,
   },
   scrollContainer: {
     flex: 1,

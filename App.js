@@ -33,9 +33,8 @@ const Tab = createBottomTabNavigator();
 // Tab Navigator for authenticated users
 const MainTabs = () => {
   const insets = useSafeAreaInsets();
-  // Use safe area inset if available, otherwise use a fallback for Android
-  // Android navigation bar is typically 48-56dp, so we use 60 to be safe
-  const bottomInset = Platform.OS === 'android' ? 60 : (insets.bottom > 0 ? insets.bottom : 0);
+  // Use the actual safe area inset from the device
+  const bottomInset = insets.bottom;
 
   return (
     <Tab.Navigator
