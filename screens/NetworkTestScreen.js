@@ -7,8 +7,10 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
 import { ANTHROPIC_API_KEY } from '@env';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const NetworkTestScreen = ({ navigation }) => {
   const [testing, setTesting] = useState(false);
@@ -178,7 +180,7 @@ const NetworkTestScreen = ({ navigation }) => {
   const diagnosis = results.length > 0 ? generateDiagnosis() : null;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>← Back</Text>
@@ -245,39 +247,39 @@ const NetworkTestScreen = ({ navigation }) => {
           <Text style={styles.infoItem}>🔥 <Text style={styles.infoLabel}>Firewall:</Text> Check security software settings</Text>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: colors.border,
   },
   backText: {
     fontSize: 16,
-    color: '#3b82f6',
+    color: colors.primary,
   },
   title: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   content: {
     flex: 1,
     padding: 16,
   },
   section: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
@@ -285,27 +287,27 @@ const styles = {
   sectionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   sectionDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginBottom: 16,
     lineHeight: 20,
   },
   testButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
     alignItems: 'center',
   },
   testButtonDisabled: {
-    backgroundColor: '#9ca3af',
+    backgroundColor: colors.disabled,
   },
   testButtonText: {
-    color: '#ffffff',
+    color: colors.textInverse,
     fontSize: 16,
     fontWeight: '600',
   },
@@ -342,7 +344,7 @@ const styles = {
     marginLeft: 8,
   },
   resultsSection: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 16,
     marginBottom: 16,
@@ -350,7 +352,7 @@ const styles = {
   resultItem: {
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
+    borderBottomColor: colors.background,
   },
   resultHeader: {
     flexDirection: 'row',
@@ -365,7 +367,7 @@ const styles = {
     flex: 1,
     fontSize: 14,
     fontWeight: '500',
-    color: '#1f2937',
+    color: colors.text,
   },
   resultStatus: {
     fontSize: 12,
@@ -373,7 +375,7 @@ const styles = {
   },
   resultDetails: {
     fontSize: 12,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginLeft: 24,
   },
   infoSection: {
@@ -385,7 +387,7 @@ const styles = {
   infoTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
   },
   infoItem: {
