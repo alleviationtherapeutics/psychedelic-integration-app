@@ -323,7 +323,7 @@ const SessionPreparationScreen = ({ navigation, route }) => {
   const renderOverview = () => (
     <ScrollView style={styles.sectionContainer}>
       <LinearGradient
-        colors={['#10b981', '#059669']}
+        colors={gradients.warm}
         style={styles.headerGradient}
       >
         <TouchableOpacity
@@ -743,18 +743,172 @@ const SessionPreparationScreen = ({ navigation, route }) => {
   );
 
   // Render based on current section
+  const renderIntentionSetting = () => (
+    <ScrollView style={styles.sectionContainer}>
+      <LinearGradient colors={gradients.warm} style={styles.headerGradient}>
+        <TouchableOpacity style={styles.backButton} onPress={() => setCurrentSection('overview')}>
+          <MaterialIcons name="arrow-back" size={24} color={colors.white} />
+        </TouchableOpacity>
+        <Text style={styles.heroTitle}>🎯 Set Your Intention</Text>
+        <Text style={styles.heroSubtitle}>What do you hope to explore or heal?</Text>
+      </LinearGradient>
+
+      <View style={styles.contentPadding}>
+        <Text style={styles.bodyText}>
+          Your intention guides your journey. It doesn't need to be perfect - just honest and from your heart.
+        </Text>
+
+        <TextInput
+          style={styles.textArea}
+          value={customIntention}
+          onChangeText={setCustomIntention}
+          placeholder="Write your intention here..."
+          placeholderTextColor={colors.textLight}
+          multiline
+          numberOfLines={6}
+        />
+
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => {
+            if (!completedSections.includes('intention_setting')) {
+              setCompletedSections([...completedSections, 'intention_setting']);
+            }
+            setCurrentSection('overview');
+          }}
+        >
+          <Text style={styles.primaryButtonText}>Save Intention</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+
+  const renderNervousSystemCheckin = () => (
+    <ScrollView style={styles.sectionContainer}>
+      <LinearGradient colors={gradients.earth} style={styles.headerGradient}>
+        <TouchableOpacity style={styles.backButton} onPress={() => setCurrentSection('overview')}>
+          <MaterialIcons name="arrow-back" size={24} color={colors.white} />
+        </TouchableOpacity>
+        <Text style={styles.heroTitle}>🧠 Nervous System Check-in</Text>
+        <Text style={styles.heroSubtitle}>How is your nervous system feeling right now?</Text>
+      </LinearGradient>
+
+      <View style={styles.contentPadding}>
+        <Text style={styles.bodyText}>
+          Notice your current state without judgment. This awareness helps you prepare appropriately.
+        </Text>
+
+        <TextInput
+          style={styles.textArea}
+          value={nervousSystemNotes}
+          onChangeText={setNervousSystemNotes}
+          placeholder="Describe your current nervous system state..."
+          placeholderTextColor={colors.textLight}
+          multiline
+          numberOfLines={6}
+        />
+
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => {
+            if (!completedSections.includes('nervous_system_checkin')) {
+              setCompletedSections([...completedSections, 'nervous_system_checkin']);
+            }
+            setCurrentSection('overview');
+          }}
+        >
+          <Text style={styles.primaryButtonText}>Save Check-in</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+
+  const renderPartsCheckin = () => (
+    <ScrollView style={styles.sectionContainer}>
+      <LinearGradient colors={gradients.calm} style={styles.headerGradient}>
+        <TouchableOpacity style={styles.backButton} onPress={() => setCurrentSection('overview')}>
+          <MaterialIcons name="arrow-back" size={24} color={colors.white} />
+        </TouchableOpacity>
+        <Text style={styles.heroTitle}>💭 Parts Check-in</Text>
+        <Text style={styles.heroSubtitle}>Which parts of you are present today?</Text>
+      </LinearGradient>
+
+      <View style={styles.contentPadding}>
+        <Text style={styles.bodyText}>
+          Notice any parts that feel activated - worried, excited, protective, or curious parts.
+        </Text>
+
+        <TextInput
+          style={styles.textArea}
+          value={partsNotes}
+          onChangeText={setPartsNotes}
+          placeholder="Which parts do you notice? What are they saying?"
+          placeholderTextColor={colors.textLight}
+          multiline
+          numberOfLines={6}
+        />
+
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => {
+            if (!completedSections.includes('parts_checkin')) {
+              setCompletedSections([...completedSections, 'parts_checkin']);
+            }
+            setCurrentSection('overview');
+          }}
+        >
+          <Text style={styles.primaryButtonText}>Save Check-in</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+
+  const renderSessionDayPrep = () => (
+    <ScrollView style={styles.sectionContainer}>
+      <LinearGradient colors={gradients.warm} style={styles.headerGradient}>
+        <TouchableOpacity style={styles.backButton} onPress={() => setCurrentSection('overview')}>
+          <MaterialIcons name="arrow-back" size={24} color={colors.white} />
+        </TouchableOpacity>
+        <Text style={styles.heroTitle}>✅ Session Day Checklist</Text>
+        <Text style={styles.heroSubtitle}>Practical preparations for your session</Text>
+      </LinearGradient>
+
+      <View style={styles.contentPadding}>
+        <Text style={styles.bodyText}>
+          Take care of the practical details so you can focus fully on your journey.
+        </Text>
+
+        <Text style={styles.checklistNote}>
+          Check off items as you complete them:
+        </Text>
+
+        <TouchableOpacity
+          style={styles.primaryButton}
+          onPress={() => {
+            if (!completedSections.includes('session_day_prep')) {
+              setCompletedSections([...completedSections, 'session_day_prep']);
+            }
+            setCurrentSection('overview');
+          }}
+        >
+          <Text style={styles.primaryButtonText}>Mark Complete</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
+  );
+
   const renderCurrentSection = () => {
     switch (currentSection) {
       case 'overview':
         return renderOverview();
       case 'intention_setting':
-        return null; // Will implement in next part
+        return renderIntentionSetting();
       case 'nervous_system_checkin':
-        return null; // Will implement in next part
+        return renderNervousSystemCheckin();
       case 'parts_checkin':
-        return null; // Will implement in next part
+        return renderPartsCheckin();
       case 'session_day_prep':
-        return null; // Will implement in next part
+        return renderSessionDayPrep();
       default:
         return renderOverview();
     }
@@ -1191,6 +1345,39 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#78350f',
     lineHeight: 20,
+  },
+  textArea: {
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.sand,
+    borderRadius: borderRadius.md,
+    padding: spacing.md,
+    fontSize: 16,
+    color: colors.text,
+    marginBottom: spacing.md,
+    minHeight: 120,
+    textAlignVertical: 'top',
+  },
+  primaryButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.lg,
+    borderRadius: borderRadius.md,
+    alignItems: 'center',
+    marginTop: spacing.md,
+    ...shadows.soft,
+  },
+  primaryButtonText: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: colors.white,
+    letterSpacing: 0.3,
+  },
+  checklistNote: {
+    fontSize: 15,
+    color: colors.textSecondary,
+    marginBottom: spacing.md,
+    marginTop: spacing.sm,
   },
 });
 
