@@ -61,6 +61,12 @@ const GeneralPreparationScreen = ({ navigation }) => {
         colors={['#667eea', '#764ba2']}
         style={styles.headerGradient}
       >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+        </TouchableOpacity>
         <Text style={styles.heroTitle}>Foundational Preparation</Text>
         <Text style={styles.heroSubtitle}>
           Learn the core concepts that will support all your healing sessions
@@ -282,6 +288,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 48,
     paddingTop: 60,
+  },
+  backButton: {
+    marginBottom: 16,
   },
   heroTitle: {
     fontSize: 32,
