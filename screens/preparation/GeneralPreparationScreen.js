@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import GroundingExercisesWidget from '../../components/GroundingExercisesWidget';
 import IFSPartsEducationWidget from '../../components/IFSPartsEducationWidget';
 import NervousSystemEducationWidget from '../../components/NervousSystemEducationWidget';
+import { colors, gradients, spacing, borderRadius, shadows } from '../../theme/colors';
 
 const GeneralPreparationScreen = ({ navigation }) => {
   const [currentSection, setCurrentSection] = useState('overview');
@@ -58,14 +60,14 @@ const GeneralPreparationScreen = ({ navigation }) => {
   const renderOverview = () => (
     <ScrollView style={styles.sectionContainer}>
       <LinearGradient
-        colors={['#667eea', '#764ba2']}
+        colors={gradients.warm}
         style={styles.headerGradient}
       >
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+          <MaterialIcons name="arrow-back" size={24} color={colors.textInverse} />
         </TouchableOpacity>
         <Text style={styles.heroTitle}>Foundational Preparation</Text>
         <Text style={styles.heroSubtitle}>
@@ -267,16 +269,16 @@ const GeneralPreparationScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       {renderCurrentSection()}
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   sectionContainer: {
     flex: 1,
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
   heroTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
     textAlign: 'center',
     marginBottom: 12,
   },
@@ -311,7 +313,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 60,
     paddingBottom: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
   },
@@ -322,7 +324,7 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginLeft: 4,
   },
   contentPadding: {
@@ -331,12 +333,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 16,
   },
   bodyText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 24,
     marginBottom: 24,
   },
@@ -383,7 +385,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
@@ -409,12 +411,12 @@ const styles = StyleSheet.create({
   flowItemTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 4,
   },
   flowItemDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginBottom: 4,
   },
   flowItemTime: {
@@ -425,7 +427,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   progressBox: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     padding: 16,
     borderRadius: 12,
     marginBottom: 24,
@@ -435,7 +437,7 @@ const styles = StyleSheet.create({
   progressTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 12,
     textAlign: 'center',
   },
@@ -451,7 +453,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   startButton: {
-    backgroundColor: '#667eea',
+    backgroundColor: colors.primary,
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderRadius: 12,
@@ -461,7 +463,7 @@ const styles = StyleSheet.create({
   startButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   completeButton: {
     backgroundColor: '#10b981',
@@ -473,7 +475,7 @@ const styles = StyleSheet.create({
   completeButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
 });
 
