@@ -1,8 +1,10 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
-import { Alert, StyleSheet } from 'react-native';
+import { Alert, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { Button, Card, TextInput, Title } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 export default function AuthScreen({ navigation }) {
   const [email, setEmail] = useState('');
@@ -96,102 +98,235 @@ export default function AuthScreen({ navigation }) {
   }
 
   return (
-    <LinearGradient
-      colors={['#667eea', '#764ba2']}
-      style={styles.container}
-    >
-      <Card style={styles.card}>
-        <Card.Content>
-          <Title style={styles.title}>
-            {isSignUp ? 'Create Account' : 'Welcome Back'}
-          </Title>
-          
-          <TextInput
-            label="Email or Username"
-            placeholder="Database setup required - see console"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-            autoCapitalize="none"
-          />
-          
-          <TextInput
-            label="Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            style={styles.input}
-            autoCapitalize="none"
-          />
-          
-          <Button
-            mode="contained"
-            onPress={isSignUp ? signUpWithEmail : signInWithEmail}
-            loading={loading}
-            style={styles.button}
-          >
-            {isSignUp ? 'Sign Up' : 'Sign In'}
-          </Button>
-          
-          <Button
-            mode="text"
-            onPress={() => setIsSignUp(!isSignUp)}
-            style={styles.switchButton}
-          >
-            {isSignUp ? 'Already have an account?' : 'Need an account?'}
-          </Button>
-          
-          <Button
-            mode="text"
-            onPress={quickTestLogin}
-            style={styles.quickLoginButton}
-          >
-            🚀 Quick Test Login
-          </Button>
+    <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
+      <LinearGradient
+        colors={gradients.warm}
+        style={styles.container}
+      >
+        <View style={styles.content}>
+          {/* Logo/Header */}
+          <View style={styles.header}>
+            <Text style={styles.logo}>✦</Text>
+            <Text style={styles.appName}>Noesis</Text>
+            <Text style={styles.tagline}>Direct knowing through integration</Text>
+          </View>
 
-          <Button
-            mode="outlined"
-            onPress={() => navigation.navigate('NetworkTest')}
-            style={styles.networkTestButton}
-          >
-            🌐 Test Network Connection
-          </Button>
-        </Card.Content>
-      </Card>
-    </LinearGradient>
+          {/* Auth Card */}
+          <View style={styles.card}>
+            <Text style={styles.title}>
+              {isSignUp ? 'Begin Your Journey' : 'Welcome Back'}
+            </Text>
+
+            <TextInput
+              label="Email or Username"
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={setEmail}
+              style={styles.input}
+              autoCapitalize="none"
+              mode="outlined"
+              outlineColor={colors.sand}
+              activeOutlineColor={colors.primary}
+              theme={{
+                colors: {
+                  primary: colors.primary,
+                  text: colors.text,
+                  placeholder: colors.textSecondary,
+                }
+              }}
+            />
+
+            <TextInput
+              label="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              style={styles.input}
+              autoCapitalize="none"
+              mode="outlined"
+              outlineColor={colors.sand}
+              activeOutlineColor={colors.primary}
+              theme={{
+                colors: {
+                  primary: colors.primary,
+                  text: colors.text,
+                  placeholder: colors.textSecondary,
+                }
+              }}
+            />
+
+            <TouchableOpacity
+              style={[styles.primaryButton, loading && styles.buttonDisabled]}
+              onPress={isSignUp ? signUpWithEmail : signInWithEmail}
+              disabled={loading}
+            >
+              <Text style={styles.primaryButtonText}>
+                {loading ? 'Please wait...' : (isSignUp ? 'Create Account' : 'Sign In')}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.textButton}
+              onPress={() => setIsSignUp(!isSignUp)}
+            >
+              <Text style={styles.textButtonLabel}>
+                {isSignUp ? 'Already have an account? Sign In' : 'Need an account? Sign Up'}
+              </Text>
+            </TouchableOpacity>
+
+            <View style={styles.divider}>
+              <View style={styles.dividerLine} />
+              <Text style={styles.dividerText}>Quick Access</Text>
+              <View style={styles.dividerLine} />
+            </View>
+
+            <TouchableOpacity
+              style={styles.secondaryButton}
+              onPress={quickTestLogin}
+            >
+              <Text style={styles.secondaryButtonText}>🚀 Test Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.tertiaryButton}
+              onPress={() => navigation.navigate('NetworkTest')}
+            >
+              <Text style={styles.tertiaryButtonText}>🌐 Test Connection</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </LinearGradient>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.golden,
+  },
   container: {
     flex: 1,
+  },
+  content: {
+    flex: 1,
     justifyContent: 'center',
-    padding: 20,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.xxl,
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: spacing.xxl,
+  },
+  logo: {
+    fontSize: 64,
+    color: colors.white,
+    marginBottom: spacing.sm,
+    textShadowColor: 'rgba(122, 92, 77, 0.3)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+  },
+  appName: {
+    fontSize: 42,
+    fontWeight: 'bold',
+    color: colors.white,
+    letterSpacing: -1,
+    marginBottom: spacing.xs,
+    textShadowColor: 'rgba(122, 92, 77, 0.3)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+  },
+  tagline: {
+    fontSize: 16,
+    color: colors.cream,
+    fontWeight: '500',
+    letterSpacing: 0.5,
   },
   card: {
-    padding: 20,
-    borderRadius: 20,
+    backgroundColor: colors.white,
+    borderRadius: borderRadius.lg,
+    padding: spacing.xl,
+    ...shadows.medium,
   },
   title: {
+    fontSize: 26,
+    fontWeight: '700',
+    color: colors.deepEarth,
     textAlign: 'center',
-    marginBottom: 30,
-    fontSize: 24,
+    marginBottom: spacing.lg,
+    letterSpacing: -0.5,
   },
   input: {
-    marginBottom: 15,
+    marginBottom: spacing.md,
+    backgroundColor: colors.white,
   },
-  button: {
-    marginTop: 10,
-    paddingVertical: 5,
+  primaryButton: {
+    backgroundColor: colors.primary,
+    paddingVertical: spacing.md,
+    borderRadius: borderRadius.md,
+    alignItems: 'center',
+    marginTop: spacing.sm,
+    ...shadows.soft,
   },
-  switchButton: {
-    marginTop: 10,
+  buttonDisabled: {
+    opacity: 0.6,
   },
-  quickLoginButton: {
-    marginTop: 5,
+  primaryButtonText: {
+    color: colors.white,
+    fontSize: 17,
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
-  networkTestButton: {
-    marginTop: 15,
-    borderColor: '#10b981',
+  textButton: {
+    paddingVertical: spacing.sm,
+    alignItems: 'center',
+    marginTop: spacing.sm,
+  },
+  textButtonLabel: {
+    color: colors.slate,
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  divider: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.sand,
+  },
+  dividerText: {
+    color: colors.textSecondary,
+    fontSize: 13,
+    fontWeight: '600',
+    paddingHorizontal: spacing.md,
+  },
+  secondaryButton: {
+    backgroundColor: colors.sand,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.sm,
+    alignItems: 'center',
+    marginTop: spacing.xs,
+  },
+  secondaryButtonText: {
+    color: colors.deepEarth,
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  tertiaryButton: {
+    backgroundColor: 'transparent',
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.sm,
+    alignItems: 'center',
+    marginTop: spacing.xs,
+    borderWidth: 1,
+    borderColor: colors.sage,
+  },
+  tertiaryButtonText: {
+    color: colors.sage,
+    fontSize: 15,
+    fontWeight: '600',
   },
 });
