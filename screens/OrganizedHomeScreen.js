@@ -11,8 +11,10 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, Appbar } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
 import { supabase } from '../lib/supabase';
 import FeedbackButton from '../components/FeedbackButton';
+import { colors, gradients, shadows, spacing, borderRadius } from '../theme/colors';
 
 const { width } = Dimensions.get('window');
 
@@ -319,22 +321,25 @@ const OrganizedHomeScreen = ({ navigation }) => {
   };
 
   const renderWelcomeHeader = () => (
-    <View style={styles.welcomeContainer}>
-      <Text style={styles.welcomeTitle}>Welcome to Integration</Text>
+    <LinearGradient
+      colors={[colors.cream, colors.sand]}
+      style={styles.welcomeContainer}
+    >
+      <Text style={styles.welcomeTitle}>Welcome to Noesis</Text>
       <Text style={styles.welcomeSubtitle}>
-        Your companion for psychedelic integration and healing
+        Direct knowing through integration
       </Text>
-    </View>
+    </LinearGradient>
   );
 
   if (loading) {
     return (
       <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
-        <Appbar.Header>
-          <Appbar.Content title="Integration" />
+        <Appbar.Header style={styles.appbar}>
+          <Appbar.Content title="Noesis" titleStyle={styles.appbarTitle} />
         </Appbar.Header>
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" color={colors.primary} />
           <Text style={styles.loadingText}>Loading your dashboard...</Text>
         </View>
       </SafeAreaView>
@@ -343,8 +348,8 @@ const OrganizedHomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
-      <Appbar.Header>
-        <Appbar.Content title="Integration" />
+      <Appbar.Header style={styles.appbar}>
+        <Appbar.Content title="Noesis" titleStyle={styles.appbarTitle} />
         <Appbar.Action
           icon="cog"
           onPress={() => navigation.navigate('NetworkTest')}
@@ -372,7 +377,16 @@ const OrganizedHomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
+  },
+  appbar: {
+    backgroundColor: colors.surface,
+    elevation: 0,
+  },
+  appbarTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: colors.primary,
   },
   loadingContainer: {
     flex: 1,
@@ -380,137 +394,127 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    marginTop: 16,
+    marginTop: spacing.md,
     fontSize: 16,
-    color: '#666',
+    color: colors.textSecondary,
   },
   content: {
     flex: 1,
   },
   welcomeContainer: {
-    padding: 24,
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    padding: spacing.xl,
+    borderBottomWidth: 0,
   },
   welcomeTitle: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
-    color: '#1f2937',
-    marginBottom: 8,
+    color: colors.deepEarth,
+    marginBottom: spacing.sm,
+    letterSpacing: -0.5,
   },
   welcomeSubtitle: {
-    fontSize: 16,
-    color: '#6b7280',
-    lineHeight: 22,
+    fontSize: 17,
+    color: colors.slate,
+    lineHeight: 24,
+    fontWeight: '400',
   },
   sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#1f2937',
-    marginBottom: 16,
+    fontSize: 22,
+    fontWeight: '700',
+    color: colors.deepEarth,
+    marginBottom: spacing.md,
+    letterSpacing: -0.3,
   },
   mainActionsContainer: {
-    padding: 24,
+    padding: spacing.lg,
   },
   primaryActions: {
-    gap: 16,
+    gap: spacing.md,
   },
   actionCard: {
-    borderRadius: 12,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
+    marginBottom: spacing.md,
+    ...shadows.soft,
   },
   primaryCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: colors.sand,
   },
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 12,
+    marginBottom: spacing.sm,
   },
   actionIcon: {
     alignItems: 'center',
   },
   actionEmoji: {
-    fontSize: 40,
+    fontSize: 44,
   },
   badge: {
     paddingHorizontal: 10,
     paddingVertical: 4,
-    borderRadius: 12,
+    borderRadius: borderRadius.md,
   },
   badgeText: {
     fontSize: 11,
-    fontWeight: '600',
-    color: '#ffffff',
+    fontWeight: '700',
+    color: colors.white,
+    letterSpacing: 0.5,
   },
   actionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#1f2937',
+    fontSize: 19,
+    fontWeight: '700',
+    color: colors.deepEarth,
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: spacing.sm,
+    letterSpacing: -0.2,
   },
   actionDescription: {
-    fontSize: 14,
-    color: '#6b7280',
+    fontSize: 15,
+    color: colors.slate,
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 22,
   },
   secondaryActions: {
     flexDirection: 'row',
-    gap: 12,
-    marginTop: 24,
+    gap: spacing.sm,
+    marginTop: spacing.lg,
   },
   secondaryCard: {
     flex: 1,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: colors.sand,
     borderWidth: 1,
-    borderColor: '#d1d5db',
+    borderColor: colors.cream,
     alignItems: 'center',
   },
   secondaryActionEmoji: {
     fontSize: 24,
-    marginBottom: 8,
+    marginBottom: spacing.sm,
   },
   secondaryActionTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#374151',
+    color: colors.deepEarth,
     textAlign: 'center',
   },
   recentSessionsContainer: {
-    backgroundColor: '#ffffff',
-    margin: 24,
+    backgroundColor: colors.surface,
+    margin: spacing.lg,
     marginTop: 0,
-    borderRadius: 12,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
+    ...shadows.soft,
   },
   sessionItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: spacing.sm,
     borderBottomWidth: 1,
-    borderBottomColor: '#f3f4f6',
+    borderBottomColor: colors.sand,
   },
   sessionInfo: {
     flex: 1,
@@ -518,36 +522,36 @@ const styles = StyleSheet.create({
   sessionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 4,
   },
   sessionDate: {
     fontSize: 12,
-    color: '#9ca3af',
+    color: colors.textLight,
     marginBottom: 2,
   },
   sessionType: {
     fontSize: 12,
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   sessionArrow: {
-    paddingLeft: 16,
+    paddingLeft: spacing.md,
   },
   arrowText: {
     fontSize: 18,
-    color: '#9ca3af',
+    color: colors.primary,
   },
   viewAllButton: {
-    marginTop: 16,
-    paddingVertical: 12,
+    marginTop: spacing.md,
+    paddingVertical: spacing.sm,
     alignItems: 'center',
-    backgroundColor: '#f3f4f6',
-    borderRadius: 8,
+    backgroundColor: colors.sand,
+    borderRadius: borderRadius.sm,
   },
   viewAllText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#6b7280',
+    color: colors.primary,
   },
   bottomSpacing: {
     height: 40,
