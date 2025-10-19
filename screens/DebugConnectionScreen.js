@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const DebugConnectionScreen = ({ navigation }) => {
   const [status, setStatus] = useState('Testing connection...');
@@ -73,7 +75,8 @@ const DebugConnectionScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, padding: 20, backgroundColor: '#f5f5f5' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }} edges={['top', 'bottom']}>
+    <View style={{ flex: 1, padding: 20 }}>
       <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 20 }}>
         Connection Debug
       </Text>
@@ -83,19 +86,19 @@ const DebugConnectionScreen = ({ navigation }) => {
       </Text>
       
       <TouchableOpacity
-        style={{ backgroundColor: '#3b82f6', padding: 15, borderRadius: 8, marginBottom: 20 }}
+        style={{ backgroundColor: colors.primary, padding: 15, borderRadius: 8, marginBottom: 20 }}
         onPress={testConnection}
       >
-        <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>
+        <Text style={{ color: colors.textInverse, textAlign: 'center', fontWeight: 'bold' }}>
           Retest Connection
         </Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         style={{ backgroundColor: '#10b981', padding: 15, borderRadius: 8, marginBottom: 20 }}
         onPress={tryLogin}
       >
-        <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>
+        <Text style={{ color: colors.textInverse, textAlign: 'center', fontWeight: 'bold' }}>
           Test Login
         </Text>
       </TouchableOpacity>
@@ -116,20 +119,21 @@ const DebugConnectionScreen = ({ navigation }) => {
         style={{ backgroundColor: '#f59e0b', padding: 15, borderRadius: 8, marginTop: 20 }}
         onPress={() => navigation.goBack()}
       >
-        <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>
+        <Text style={{ color: colors.textInverse, textAlign: 'center', fontWeight: 'bold' }}>
           Back to Auth
         </Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity
         style={{ backgroundColor: '#10b981', padding: 15, borderRadius: 8, marginTop: 10 }}
         onPress={() => navigation.navigate('TestApp')}
       >
-        <Text style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}>
-          🚀 Test App (Bypass Auth)
+        <Text style={{ color: colors.textInverse, textAlign: 'center', fontWeight: 'bold' }}>
+          Test App (Bypass Auth)
         </Text>
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 };
 
