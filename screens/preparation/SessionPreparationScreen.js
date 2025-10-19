@@ -10,9 +10,11 @@ import {
   TextInput,
   Modal
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../../lib/supabase';
+import { colors, gradients, spacing, borderRadius, shadows } from '../../theme/colors';
 
 const SessionPreparationScreen = ({ navigation, route }) => {
   const { sessionId, sessionData } = route.params || {};
@@ -431,7 +433,7 @@ const SessionPreparationScreen = ({ navigation, route }) => {
 
   const renderLearningModules = () => (
     <ScrollView style={styles.sectionContainer}>
-      <LinearGradient colors={['#667eea', '#764ba2']} style={styles.headerGradient}>
+      <LinearGradient colors={gradients.warm} style={styles.headerGradient}>
         <Text style={styles.heroTitle}>📚 Quick Learning Refresher</Text>
         <Text style={styles.heroSubtitle}>
           Review foundational concepts before your session
@@ -759,18 +761,18 @@ const SessionPreparationScreen = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       {renderCurrentSection()}
-      
+
       {/* Modal will be added in next part */}
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   sectionContainer: {
     flex: 1,
@@ -1094,7 +1096,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 24,
     borderLeftWidth: 4,
-    borderLeftColor: '#3b82f6',
+    borderLeftColor: colors.primary,
   },
   infoTitle: {
     fontSize: 15,
@@ -1146,7 +1148,7 @@ const styles = StyleSheet.create({
   },
   topicText: {
     fontSize: 12,
-    color: '#7c3aed',
+    color: colors.primary,
     fontWeight: '500',
   },
   moduleMeta: {
@@ -1157,7 +1159,7 @@ const styles = StyleSheet.create({
     color: '#9ca3af',
   },
   moduleButton: {
-    backgroundColor: '#667eea',
+    backgroundColor: colors.primary,
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderRadius: 8,
