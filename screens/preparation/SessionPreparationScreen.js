@@ -324,6 +324,12 @@ const SessionPreparationScreen = ({ navigation, route }) => {
         colors={['#10b981', '#059669']}
         style={styles.headerGradient}
       >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+        </TouchableOpacity>
         <Text style={styles.heroTitle}>Session Preparation</Text>
         <Text style={styles.heroSubtitle}>
           Prepare your mind, body, and spirit for this healing journey
@@ -773,6 +779,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 48,
     paddingTop: 60,
+  },
+  backButton: {
+    marginBottom: 16,
   },
   heroTitle: {
     fontSize: 32,
