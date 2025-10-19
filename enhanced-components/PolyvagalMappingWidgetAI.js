@@ -9,6 +9,7 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { PolyvagalAIService } from '../lib/polyvagalAIService';
 
 /**
@@ -440,7 +441,7 @@ Think of times when you felt:
   const progress = ((currentStep + 1) / mappingSteps.length) * 100;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={onSkip}>
@@ -505,7 +506,7 @@ Think of times when you felt:
           )}
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
