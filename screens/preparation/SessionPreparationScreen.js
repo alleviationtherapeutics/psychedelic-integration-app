@@ -120,27 +120,6 @@ const SessionPreparationScreen = ({ navigation, route }) => {
       estimatedTime: '2 min'
     },
     {
-      id: 'learning_modules',
-      title: 'Quick Learning Refresher',
-      emoji: '📚',
-      description: 'Review nervous system, parts work, grounding',
-      estimatedTime: '10-15 min (optional)'
-    },
-    {
-      id: 'belief_assessments',
-      title: 'Belief Assessments',
-      emoji: '🔍',
-      description: 'Baseline assessment of your core beliefs',
-      estimatedTime: '15-20 min'
-    },
-    {
-      id: 'philosophical_explorations',
-      title: 'Philosophical Explorations',
-      emoji: '🤔',
-      description: 'Explore concepts of self and identity',
-      estimatedTime: '10 min'
-    },
-    {
       id: 'intention_setting',
       title: 'Set Your Intention',
       emoji: '🎯',
@@ -411,7 +390,7 @@ const SessionPreparationScreen = ({ navigation, route }) => {
 
         <TouchableOpacity
           style={styles.startButton}
-          onPress={() => setCurrentSection('learning_modules')}
+          onPress={() => setCurrentSection('intention_setting')}
         >
           <Text style={styles.startButtonText}>Begin Session Preparation</Text>
         </TouchableOpacity>
@@ -760,12 +739,6 @@ const SessionPreparationScreen = ({ navigation, route }) => {
     switch (currentSection) {
       case 'overview':
         return renderOverview();
-      case 'learning_modules':
-        return renderLearningModules();
-      case 'belief_assessments':
-        return renderBeliefAssessments();
-      case 'philosophical_explorations':
-        return renderPhilosophicalExplorations();
       case 'intention_setting':
         return null; // Will implement in next part
       case 'nervous_system_checkin':

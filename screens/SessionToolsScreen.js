@@ -160,6 +160,12 @@ const SessionToolsScreen = ({ navigation }) => {
         colors={['#0ea5e9', '#3b82f6']}
         style={styles.headerGradient}
       >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+        </TouchableOpacity>
         <Text style={styles.heroTitle}>🛠️ Session Tools</Text>
         <Text style={styles.heroSubtitle}>
           Create and manage your integration sessions
@@ -409,6 +415,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 32,
     paddingTop: 60,
+  },
+  backButton: {
+    marginBottom: 16,
   },
   heroTitle: {
     fontSize: 32,
