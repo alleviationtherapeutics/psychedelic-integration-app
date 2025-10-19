@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Background -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E6B17E;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4725C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C97B63;stop-opacity:1" />
+    </linearGradient>
+
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background with rounded corners -->
+  <rect width="1024" height="1024" fill="url(#bg-gradient)" rx="180"/>
+
+  <!-- Subtle glow effect -->
+  <circle cx="512" cy="512" r="400" fill="url(#glow)"/>
+
+  <!-- Simplified four-pointed star / sparkle -->
+  <g transform="translate(512, 512)">
+    <!-- Main star shape -->
+    <!-- Vertical -->
+    <path d="M 0,-320 L -60,-100 L -80,0 L -60,100 L 0,320 L 60,100 L 80,0 L 60,-100 Z"
+          fill="#FFFFFF"
+          opacity="0.98"
+          filter="drop-shadow(0 8px 16px rgba(122, 92, 77, 0.3))"/>
+    <!-- Horizontal -->
+    <path d="M -320,0 L -100,-60 L 0,-80 L 100,-60 L 320,0 L 100,60 L 0,80 L -100,60 Z"
+          fill="#FFFFFF"
+          opacity="0.98"
+          filter="drop-shadow(0 8px 16px rgba(122, 92, 77, 0.3))"/>
+
+    <!-- Center circle for depth -->
+    <circle cx="0" cy="0" r="65" fill="#F5F1E8"/>
+    <circle cx="0" cy="0" r="40" fill="#D4725C"/>
+    <circle cx="0" cy="0" r="20" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+</svg>
