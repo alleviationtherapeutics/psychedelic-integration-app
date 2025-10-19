@@ -8,6 +8,7 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { supabase } from './lib/supabase';
+import { colors } from './theme/colors';
 import AuthScreen from './screens/AuthScreen';
 import ConversationScreen from './screens/ConversationScreen';
 import SimpleEnhancedConversationScreen from './screens/SimpleEnhancedConversationScreen';
@@ -52,23 +53,28 @@ const MainTabs = () => {
 
           return <MaterialIcons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#2196F3',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.textSecondary,
         headerShown: false,
         tabBarStyle: {
-          height: 60 + bottomInset, // Add safe area inset to height
-          paddingBottom: bottomInset, // Pad bottom by safe area inset
+          height: 60 + bottomInset,
+          paddingBottom: bottomInset,
           paddingTop: 8,
+          backgroundColor: colors.surface,
+          borderTopColor: colors.sand,
+          borderTopWidth: 1,
         },
         tabBarLabelStyle: {
           paddingBottom: 4,
+          fontSize: 12,
+          fontWeight: '600',
         },
       })}
     >
       <Tab.Screen
         name="Sessions"
         component={OrganizedHomeScreen}
-        options={{ title: 'Integration' }}
+        options={{ title: 'Home' }}
       />
       <Tab.Screen
         name="Education"
@@ -78,7 +84,7 @@ const MainTabs = () => {
       <Tab.Screen
         name="AllSessions"
         component={AllSessionsScreen}
-        options={{ title: 'All Sessions' }}
+        options={{ title: 'Sessions' }}
       />
     </Tab.Navigator>
   );
