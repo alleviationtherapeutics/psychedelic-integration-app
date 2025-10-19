@@ -9,9 +9,11 @@ import {
   TextInput,
   Modal
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
 import { supabase } from '../lib/supabase';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 
 const PreparationScreen = ({ navigation, route }) => {
   const { sessionId, sessionData } = route.params || {};
@@ -57,10 +59,10 @@ const PreparationScreen = ({ navigation, route }) => {
   ];
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <ScrollView style={styles.scrollContainer}>
         <LinearGradient
-          colors={['#6366f1', '#8b5cf6']}
+          colors={gradients.warm}
           style={styles.headerGradient}
         >
           <Text style={styles.heroTitle}>🆕 NEW Preparation Hub</Text>
@@ -234,14 +236,14 @@ const PreparationScreen = ({ navigation, route }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   scrollContainer: {
     flex: 1,
@@ -254,7 +256,7 @@ const styles = StyleSheet.create({
   heroTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
     textAlign: 'center',
     marginBottom: 12,
   },
@@ -270,22 +272,22 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 16,
   },
   bodyText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
     lineHeight: 24,
     marginBottom: 32,
   },
   optionCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 24,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: colors.border,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -310,17 +312,17 @@ const styles = StyleSheet.create({
   optionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 4,
   },
   optionSubtitle: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontWeight: '500',
   },
   optionDescription: {
     fontSize: 16,
-    color: '#374151',
+    color: colors.text,
     lineHeight: 24,
     marginBottom: 16,
   },
@@ -329,7 +331,7 @@ const styles = StyleSheet.create({
   },
   optionTime: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     fontStyle: 'italic',
   },
   optionButton: {
@@ -343,7 +345,7 @@ const styles = StyleSheet.create({
   optionButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
     marginRight: 8,
   },
   recommendationBox: {
@@ -412,7 +414,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 24,
     width: '90%',
@@ -427,22 +429,22 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
   },
   modalLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#374151',
+    color: colors.text,
     marginBottom: 8,
   },
   modalInput: {
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: colors.border,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 16,
   },
   modalCreateButton: {
@@ -455,7 +457,7 @@ const styles = StyleSheet.create({
   modalCreateButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   modalCancelButton: {
     paddingVertical: 14,
@@ -465,7 +467,7 @@ const styles = StyleSheet.create({
   modalCancelButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
 });
 
