@@ -8,7 +8,8 @@ import {
   Alert,
   Animated,
   ActivityIndicator,
-  Platform
+  Platform,
+  KeyboardAvoidingView
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
@@ -600,7 +601,12 @@ You can continue documenting your experience, and I'll be back online soon.`;
         )}
       </ScrollView>
 
-      {renderInput()}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+      >
+        {renderInput()}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

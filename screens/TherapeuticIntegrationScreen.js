@@ -8,7 +8,8 @@ import {
   Alert,
   Animated,
   ActivityIndicator,
-  Platform
+  Platform,
+  KeyboardAvoidingView
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { supabase } from '../lib/supabase';
@@ -664,7 +665,12 @@ Before we dive in, let's check in with your nervous system. How is your body fee
         )}
       </ScrollView>
 
-      {renderInput()}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+      >
+        {renderInput()}
+      </KeyboardAvoidingView>
 
       {/* Embedded Practice Widget */}
       {currentPractice && (
