@@ -11,6 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ActivityIndicator, Appbar, Card, FAB } from 'react-native-paper';
 import { supabase } from '../lib/supabase';
+import { colors, spacing, borderRadius, shadows } from '../theme/colors';
 
 const AllSessionsScreen = ({ navigation }) => {
   const [sessions, setSessions] = useState([]);
@@ -344,7 +345,7 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     flexDirection: 'row',
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderBottomWidth: 1,
@@ -361,8 +362,8 @@ const styles = StyleSheet.create({
     borderColor: '#d1d5db',
   },
   filterButtonActive: {
-    backgroundColor: '#3b82f6',
-    borderColor: '#3b82f6',
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
   filterButtonText: {
     fontSize: 12,
@@ -371,7 +372,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   filterButtonTextActive: {
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   loadingContainer: {
     flex: 1,
@@ -462,7 +463,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#10b981',
   },
   integrationButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
   },
   createButtonText: {
     color: '#fff',
@@ -476,13 +477,13 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   fab: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
   },
   experienceFab: {
     backgroundColor: '#10b981',
   },
   integrationFab: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: colors.primary,
   },
 });
 
