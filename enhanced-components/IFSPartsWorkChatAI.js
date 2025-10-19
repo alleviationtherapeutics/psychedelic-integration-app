@@ -10,6 +10,7 @@ import {
   Platform,
   ActivityIndicator
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { IFSAIService } from '../lib/ifsAIService';
 
 /**
@@ -330,13 +331,14 @@ This is a beginning. Parts work is about ongoing relationship. You can return to
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
-    >
-      {/* Header */}
-      <View style={styles.header}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoid}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
+      >
+        {/* Header */}
+        <View style={styles.header}>
         <TouchableOpacity onPress={onSkip}>
           <Text style={styles.backButton}>← Back</Text>
         </TouchableOpacity>
@@ -402,12 +404,17 @@ This is a beginning. Parts work is about ongoing relationship. You can return to
           </TouchableOpacity>
         </View>
       )}
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  keyboardAvoid: {
     flex: 1,
     backgroundColor: '#f9fafb',
   },
