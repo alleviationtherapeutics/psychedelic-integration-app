@@ -14,6 +14,7 @@ import {
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MaterialIcons } from '@expo/vector-icons';
+import { colors, gradients, spacing, borderRadius, shadows } from '../theme/colors';
 import { supabase } from '../lib/supabase';
 
 const SessionToolsScreen = ({ navigation }) => {
@@ -155,16 +156,16 @@ const SessionToolsScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top']}>
+    <SafeAreaView style={[styles.container, { paddingBottom: insets.bottom }]} edges={['top', 'bottom']}>
       <LinearGradient
-        colors={['#0ea5e9', '#3b82f6']}
+        colors={gradients.warm}
         style={styles.headerGradient}
       >
         <TouchableOpacity
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <MaterialIcons name="arrow-back" size={24} color="#ffffff" />
+          <MaterialIcons name="arrow-back" size={24} color={colors.textInverse} />
         </TouchableOpacity>
         <Text style={styles.heroTitle}>🛠️ Session Tools</Text>
         <Text style={styles.heroSubtitle}>
@@ -409,7 +410,7 @@ const SessionToolsScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
   },
   headerGradient: {
     paddingHorizontal: 24,
@@ -422,13 +423,13 @@ const styles = StyleSheet.create({
   heroTitle: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: colors.textInverse,
     textAlign: 'center',
     marginBottom: 8,
   },
   heroSubtitle: {
     fontSize: 16,
-    color: '#e0e7ff',
+    color: 'rgba(255, 255, 255, 0.9)',
     textAlign: 'center',
     lineHeight: 24,
   },
@@ -452,7 +453,7 @@ const styles = StyleSheet.create({
   createButtonText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
     marginLeft: 8,
   },
   scrollContainer: {
@@ -470,11 +471,11 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
   },
   sessionCount: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   loadingContainer: {
     paddingVertical: 40,
@@ -483,7 +484,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   emptyState: {
     paddingVertical: 60,
@@ -496,18 +497,18 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   emptyDescription: {
     fontSize: 14,
-    color: '#6b7280',
+    color: colors.textSecondary,
     textAlign: 'center',
     lineHeight: 20,
     maxWidth: 300,
   },
   sessionCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 12,
     padding: 20,
     marginBottom: 16,
@@ -532,7 +533,7 @@ const styles = StyleSheet.create({
   sessionTitle: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 8,
   },
   sessionMeta: {
@@ -541,7 +542,7 @@ const styles = StyleSheet.create({
   },
   sessionDate: {
     fontSize: 13,
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   sessionDivider: {
     fontSize: 13,
@@ -566,7 +567,7 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   progressIndicators: {
     flexDirection: 'row',
@@ -582,7 +583,7 @@ const styles = StyleSheet.create({
   },
   progressLabel: {
     fontSize: 12,
-    color: '#6b7280',
+    color: colors.textSecondary,
     marginLeft: 6,
   },
   sessionFooter: {
@@ -590,7 +591,7 @@ const styles = StyleSheet.create({
   },
   tapToOpen: {
     fontSize: 13,
-    color: '#3b82f6',
+    color: colors.primary,
     fontWeight: '500',
   },
   modalOverlay: {
@@ -600,7 +601,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    backgroundColor: '#ffffff',
+    backgroundColor: colors.surface,
     borderRadius: 16,
     padding: 24,
     width: '90%',
@@ -615,7 +616,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1f2937',
+    color: colors.text,
   },
   modalLabel: {
     fontSize: 14,
@@ -624,13 +625,13 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   modalInput: {
-    backgroundColor: '#f9fafb',
+    backgroundColor: colors.background,
     borderWidth: 1,
     borderColor: '#e5e7eb',
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
-    color: '#1f2937',
+    color: colors.text,
     marginBottom: 16,
   },
   modalInfoBox: {
@@ -654,7 +655,7 @@ const styles = StyleSheet.create({
   modalCreateButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#ffffff',
+    color: colors.textInverse,
   },
   modalCancelButton: {
     paddingVertical: 14,
@@ -664,7 +665,7 @@ const styles = StyleSheet.create({
   modalCancelButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#6b7280',
+    color: colors.textSecondary,
   },
   optionalDetailsToggle: {
     flexDirection: 'row',
@@ -676,12 +677,12 @@ const styles = StyleSheet.create({
   optionalDetailsToggleText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#3b82f6',
+    color: colors.primary,
   },
   optionalBadge: {
     fontSize: 11,
     fontWeight: '600',
-    color: '#6b7280',
+    color: colors.textSecondary,
     backgroundColor: '#f3f4f6',
     paddingHorizontal: 8,
     paddingVertical: 4,
