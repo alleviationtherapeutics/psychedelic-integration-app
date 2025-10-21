@@ -1,5 +1,5 @@
 /**
- * Noesis Design System - Color Palette
+ * Psychetelia Design System - Color Palette
  * Blending warm/earthy with modern wellness aesthetics
  */
 

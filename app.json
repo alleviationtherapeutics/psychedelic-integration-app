@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Noesis",
+    "name": "Psychetelia",
     "slug": "psychedelic-integration-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,7 +14,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.psychedelicintegrationapp",
+      "bundleIdentifier": "com.anonymous.psycheteliaapp",
       "runtimeVersion": {
         "policy": "appVersion"
       },
@@ -23,7 +23,7 @@
       }
     },
     "android": {
-      "package": "com.anonymous.noesisapp",
+      "package": "com.anonymous.psycheteliaapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#F5F1E8"
