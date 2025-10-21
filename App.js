@@ -12,6 +12,7 @@ import { supabase } from './lib/supabase';
 import { colors } from './theme/colors';
 import AuthScreen from './screens/AuthScreen';
 import OnboardingCarousel from './screens/OnboardingCarousel';
+import AnimatedSplash from './components/AnimatedSplash';
 import ConversationScreen from './screens/ConversationScreen';
 import SimpleEnhancedConversationScreen from './screens/SimpleEnhancedConversationScreen';
 import EnhancedConversationScreen from './screens/EnhancedConversationScreen';
@@ -100,6 +101,7 @@ export default function App() {
   const [bypassAuth, setBypassAuth] = useState(false); // Add bypass mode
   const [onboardingComplete, setOnboardingComplete] = useState(false);
   const [checkingOnboarding, setCheckingOnboarding] = useState(true);
+  const [showSplash, setShowSplash] = useState(true); // Show animated splash on startup
 
   useEffect(() => {
     checkOnboardingStatus();
@@ -188,11 +190,23 @@ export default function App() {
     );
   }
 
+  // Show animated splash screen
+  if (showSplash) {
+    return (
+      <AnimatedSplash
+        onAnimationFinish={() => {
+          console.log('Splash animation finished');
+          setShowSplash(false);
+        }}
+      />
+    );
+  }
+
   if (loading || checkingOnboarding) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
-        <Text style={styles.loadingTitle}>Noesis</Text>
+        <Text style={styles.loadingTitle}>Psychetelia</Text>
         <Text style={styles.debugText}>{debugInfo}</Text>
         <Text style={styles.debugHint}>
           If stuck here, check console logs or try restarting
